@@ -23,8 +23,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 //connectDB();
 
-const userDatabase = {}; // Lưu trữ các id và Object
-const userExcersize = []; // Lưu trữ các id và Excersize
 // Cấu hình nơi lưu trữ file
 // const storage = multer.diskStorage({
 //   destination: (req, file, cb) => {
@@ -49,6 +47,11 @@ const upload = multer({ storage });
 
 //     return new ResponseSuccessDto(201, 'Insert successfull', generatedId.id);
 //   }
+
+// Route mặc định để phục vụ file test.html
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "test.html"));
+});
 
 app.post("/api/fileanalyse", upload.single("upfile"), (req, res) => {
   console.log("API File upload");
