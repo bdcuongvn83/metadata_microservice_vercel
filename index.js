@@ -26,14 +26,17 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const userDatabase = {}; // Lưu trữ các id và Object
 const userExcersize = []; // Lưu trữ các id và Excersize
 // Cấu hình nơi lưu trữ file
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    cb(null, "uploads/"); // Thư mục lưu file
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`); // Đặt tên file
-  },
-});
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     cb(null, "uploads/"); // Thư mục lưu file
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, `${Date.now()}-${file.originalname}`); // Đặt tên file
+//   },
+// });
+
+const storage = multer.memoryStorage(); // Lưu file trong bộ nhớ RAM
+
 // Khởi tạo Multer
 const upload = multer({ storage });
 
